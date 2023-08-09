@@ -8,6 +8,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
+import 'package:flutter/services.dart';
 import 'package:path/path.dart' as path;
 import 'package:video_player/video_player.dart';
 
@@ -56,6 +57,9 @@ class CameraPickerViewerState extends State<CameraPickerViewer> {
   @override
   void initState() {
     super.initState();
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
     if (widget.viewType == CameraPickerViewType.video) {
       initializeVideoPlayerController();
     }
@@ -199,6 +203,12 @@ class CameraPickerViewerState extends State<CameraPickerViewer> {
         padding: const EdgeInsets.all(10),
         child: IconButton(
           onPressed: () {
+            SystemChrome.setPreferredOrientations([
+              DeviceOrientation.portraitUp,
+              DeviceOrientation.portraitDown,
+              DeviceOrientation.landscapeLeft,
+              DeviceOrientation.landscapeRight,
+            ]);
             if (isSavingEntity) {
               return;
             }

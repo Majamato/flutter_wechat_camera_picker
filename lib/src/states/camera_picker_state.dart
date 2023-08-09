@@ -183,6 +183,13 @@ class CameraPickerState extends State<CameraPicker>
   @override
   void initState() {
     super.initState();
+    // Unlock all orientations
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
     WidgetsBinding.instance.addObserver(this);
     Constants.textDelegate = widget.pickerConfig.textDelegate ??
         cameraPickerTextDelegateFromLocale(widget.locale);
@@ -191,6 +198,9 @@ class CameraPickerState extends State<CameraPicker>
 
   @override
   void dispose() {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
     WidgetsBinding.instance.removeObserver(this);
     innerController?.dispose();
     currentExposureOffset.dispose();
